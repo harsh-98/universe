@@ -1,0 +1,219 @@
+<html>
+<head>
+    <title>solar system</title>
+    <script src="jQuery.js"></script>
+      <style>
+        body{background:url("pics/space.jpg");}
+        .sun{
+            background:url("pics/capture.jpg");
+            width:500px;
+            height:500px;
+            border-radius: 50%;
+            position:absolute;
+            top:100px;
+            left:-250px;
+            background-size:cover;
+            z-index:1;
+        }
+        #mer{
+            background:url("pics/q.jpg");
+            width:50px;
+            height:50px;
+            border-radius: 50%;
+            position:absolute;
+            top:20%;
+            left:0%;
+            background-size:cover;
+            transform: rotateY(180deg);
+            z-index:0;
+        }
+        #ven{
+            background:url("pics/venus.jpg");
+            width:70px;
+            height:70px;
+            border-radius: 50%;
+            position:absolute;
+            top:17.7%;
+            left:25%;
+            background-size:cover;
+            transform: rotateY(180deg);
+            z-index:0;
+        }
+        
+        
+     </style>
+    
+</head>
+    <body onload="start_rev()">
+        <div class="sun"></div>
+        <div id="mer"></div>
+        <div id="ven"></div>
+        <div style="width:200px;height:20px;float:right;background-color:white;" id="txt0"></div>
+        <div style="width:200px;height:20px;clear:right;float:right;background-color:white;" id="txt"></div>
+        <div style="width:200px;height:20px;clear:right;float:right;background-color:white;" id="txt1"></div>
+        <div style="width:200px;height:20px;clear:right;float:right;background-color:white;" id="txta0"></div>
+        <div style="width:200px;height:20px;clear:right;float:right;background-color:white;" id="txta"></div>
+        <div style="width:200px;height:20px;clear:right;float:right;background-color:white;" id="txta1"></div>
+
+        <script>
+       
+            var mer_s; var mer1,mer2,mer3;var slope;var merx,mery;
+            var mer_1=document.getElementById("mer");
+            var mer_0=document.getElementById("txt0");
+            var mer_2=document.getElementById("txt");
+            var mer_3=document.getElementById("txt1");
+            
+            var ven_s; var ven1,ven2,ven3;var slope;var venx,veny;
+            var ven_1=document.getElementById("ven");
+            var ven_0=document.getElementById("txta0");
+            var ven_2=document.getElementById("txta");
+            var ven_3=document.getElementById("txta1");
+    function start_rev(){
+       mer1= setInterval(function(){mer_p1();},1);
+       ven1= setInterval(function(){ven_p1();},2);
+    }
+         var mer_y=20;
+         var mer_x=0;
+    function mer_p1(){
+        mer_x+=0.01;
+        mer_x%=33;
+        mer_y=mer_x*mer_x;
+        mer_y=(mer_y)/1089;
+        mer_y=-Math.sqrt(1-mer_y)*30+50;
+        mer_s=mer_y.toString();
+        mer_s=mer_s+"%";
+        mer_2.innerHTML="y:  "+mer_s;
+        mer_1.style.top=mer_s;
+        mer_s=mer_x.toString();
+        mer_s=mer_s+"%";
+        mer_3.innerHTML="x:  "+mer_s;
+        document.getElementById("mer").style.left=mer_s;
+        mer_1.style.zIndex="0";
+        if(mer_x>32.99){
+            clearInterval(mer1);
+         mer2= setInterval(function(){mer_p2();},1);
+        }
+     
+    }
+        function mer_p2(){
+        mer_x-=0.01;
+        mer_x%=33;
+        mer_y=mer_x*mer_x;
+        mer_y=(mer_y)/1089;
+        mer_y=Math.sqrt(1-mer_y)*30+50;
+        mer_s=mer_y.toString();
+        mer_s=mer_s+"%";
+        mer_2.innerHTML="y:  "+mer_s;
+        mer_1.style.top=mer_s;
+        mer_s=mer_x.toString();
+        mer_s=mer_s+"%";
+        mer_3.innerHTML="x:  "+mer_s;
+        document.getElementById("mer").style.left=mer_s;
+        mer_1.style.zIndex="2";
+        if(mer_x<0){
+            clearInterval(mer2);
+           mer1= setInterval(function(){mer_p1();},1);
+        }
+     }
+       function mer_l(){
+                slope=-(merx/(-mery+50))*(100/121);
+                mer_0.innerHTML="slope : "+slope;
+                if(mery<50){
+                mer_x+=.01;
+                }
+                else{mer_x-=.01;}
+                mer_y=slope*(mer_x-merx)-mery;
+                mer_s=-mer_y.toString();
+                mer_s=mer_s+"%";
+                mer_2.innerHTML="y:  "+mer_s;
+                document.getElementById("mer").style.top=mer_s;
+                mer_s=mer_x.toString();
+                mer_s=mer_s+"%";
+                mer_3.innerHTML="x:  "+mer_s;
+                document.getElementById("mer").style.left=mer_s;
+            }     
+   $(document).ready(function(){
+       $(".sun").click(function(){$(this).fadeOut("slow",function(){
+     clearInterval(mer1);
+       clearInterval(mer2);
+           merx=mer_x;
+                mery=mer_y;
+           mer3=setInterval(function(){mer_l(); },2);
+           clearInterval(ven1);
+       clearInterval(ven2);
+           venx=ven_x;
+                veny=ven_y;
+           ven3=setInterval(function(){ven_l(); },3);
+       }); });}
+       );
+            
+           
+    
+         var ven_y=17.7;
+         var ven_x=25;
+    function ven_p1(){
+       ven_x+=0.01;
+        ven_x%=50;
+        ven_y=ven_x*ven_x;
+        ven_y=(ven_y)/2500;
+        ven_y=-Math.sqrt(1-ven_y)*35+50;
+        ven_s=ven_y.toString();
+        ven_s=ven_s+"%";
+                 ven_2.innerHTML="y:  "+ven_s;
+        ven_1.style.top=ven_s;
+        ven_s=ven_x.toString();
+        ven_s=ven_s+"%";
+                ven_3.innerHTML="x:  "+ven_s;
+        document.getElementById("ven").style.left=ven_s;
+        ven_1.style.zIndex="0";
+        if(ven_x>49.99){
+            clearInterval(ven1);
+         ven2= setInterval(function(){ven_p2();},2);
+        }
+     
+    }
+        function ven_p2(){
+       ven_x-=0.01;
+        ven_x%=50;
+             ven_y=ven_x*ven_x;
+        ven_y=(ven_y)/2500;
+        ven_y=Math.sqrt(1-ven_y)*35+50;
+            ven_s=ven_y.toString();
+        ven_s=ven_s+"%";
+                ven_2.innerHTML="y:  "+ven_s;
+        ven_1.style.top=ven_s;
+        ven_s=ven_x.toString();
+        ven_s=ven_s+"%";
+                ven_3.innerHTML="x:  "+ven_s;
+       document.getElementById("ven").style.left=ven_s;
+            ven_1.style.zIndex="2";
+        if(ven_x<0){
+            clearInterval(ven2);
+           ven1= setInterval(function(){ven_p1();},2);
+        }
+        }
+            function ven_l(){
+                slope=-(venx/(-veny+50))*(49/100);
+               ven_0.innerHTML="slope : "+slope;
+                if(veny<50){
+                ven_x+=.01;
+                }
+                else{ven_x-=.01;}
+                ven_y=slope*(ven_x-venx)-veny;
+                ven_s=-ven_y.toString();
+        ven_s=ven_s+"%";
+                ven_2.innerHTML="y:  "+ven_s;
+        document.getElementById("ven").style.top=ven_s;
+        ven_s=ven_x.toString();
+                
+        ven_s=ven_s+"%";
+                ven_3.innerHTML="x:  "+ven_s;
+       document.getElementById("ven").style.left=ven_s;
+            }
+  
+         
+            
+           
+        </script>  
+    </body>
+</html>
