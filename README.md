@@ -1,1 +1,1 @@
-olar system is available at  the url https://harsh4123.github.io/universe
+Solar system is available at  the url https://harsh-98.github.io/universe
